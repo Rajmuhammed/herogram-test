@@ -155,6 +155,7 @@ async function migrateDatabase() {
     if (connection && connection.end) {
       await connection.end();
       console.log('Database connection closed.');
+      process.exit(1);
     }
   }
 }

@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+
 const { initializeDatabase } = require('./database');
 const authRoutes = require('./routes/auth');
 const titleRoutes = require('./routes/titles');
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+app.use(express.static('public'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
@@ -33,7 +35,7 @@ app.get('/api/config', (req, res) => {
 
 // Root route
 app.get('/', (req, res) => {
-  res.json({ message: 'AI Image Generator API' });
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Initialize database and start server

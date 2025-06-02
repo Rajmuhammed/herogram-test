@@ -76,6 +76,11 @@ export const login = async (email, password) => {
 
 export const register = async (username, email, password) => {
   const apiInstance = await ensureAPI();
+
+  console.log({
+    apiInstance
+  })
+
   return apiInstance.post('/auth/register', { username, email, password });
 };
 
